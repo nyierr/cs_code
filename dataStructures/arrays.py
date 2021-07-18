@@ -78,6 +78,8 @@ class DynamicArray:
         Removes value at index and shifts back any following values.
     """
     def __init__(self, capacity=1):
+        if capacity < 1:
+            raise ValueError("Array capacity must be greater than 0")
         self.size = 0
         self.capacity = 2 * capacity
         self.array = self.__initArray(self.capacity)
