@@ -2,29 +2,40 @@
  * Given an integer array nums of unique elements,
  * return all possible subsets. Duplicates allowed.
  */
-def subsets(self, nums):
+# Solution 1: using default argument res
+def subsets1(nums):
     res = []
     find(sorted(nums), [], res)
     return res
 
-def find(self, nums, sub, res=[]):
+def find(nums, sub, res=[]):
     res.append(sub)
     for i in range(len(nums)):
-        self.helper(nums[:i] + nums[i+1:], sub + [nums[i]], res)
+        find(nums[:i] + nums[i+1:], sub + [nums[i]], res)
+
+# Solution 2: returning a list from each recursive call
+def subset2(nums, subs):
+    if len(nums) == 0:
+        return [subs]
+    r = []
+    r.append(subs)
+    for i in range(len(nums)):
+        r += f(nums[:i]+nums[i+1:], subs + [nums[i]])
+    return r    
         
 /*
  * Given an integer array nums of unique elements,
  * return all possible subsets. Duplicates NOT allowed.
  */
-def uniqueSubsets(self, nums):
+def uniqueSubsets(nums):
     res = []
     findUnique(sorted(nums), [], res)
     return res
 
-def findUnique(self, nums, sub, res=[]):
+def findUnique(nums, sub, res=[]):
     res.append(sub)
     for i in range(len(nums)):
-        self.helper(nums[i+1:], sub + [nums[i]], res)
+        self.findUnique(nums[i+1:], sub + [nums[i]], res)
         
 #
 # Finding non-unique subsets
