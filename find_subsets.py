@@ -111,3 +111,35 @@ def findUnique2(nums, subs):
 #       
 #  + x = 3, s=[3], nums = []
 
+/*
+ * Given an integer array nums that may contain duplicates,
+ * return all possible subsets. The solution set must not
+ * contain duplicate subsets. Return the solution in any order.
+ */
+# Solution 1: using default argument res
+def uniqueSubsetsDupVals(nums):
+    res = []
+    findUniqueDupVals(sorted(nums), [], res)
+    return res
+    
+def findUniqueDupVals(nums, subs, res=[]):
+    res.append(subs)
+    for i in range(len(nums)):
+        if i == 0 or nums[i] != nums[i-1]:
+            self.findUniqueDupVals(nums[i+1:], subs + [nums[i]])
+
+# Solution 2: returning a list from each recursive call 
+def uniqueSubsetsDupVals2(nums):
+    return findUniqueDupVals2(sorted(nums), [])
+    
+def findUniqueDupVals2(nums, subs):
+    if len(nums) == 0:
+        return [subs]
+        
+    r = []
+    r.append(subs)
+    for i in range(len(nums)):
+        if i == 0 or nums[i] != nums[i-1]:
+            r += self.findUniqueDupVals2(nums[i+1:], subs + [nums[i]])
+        
+    return r
